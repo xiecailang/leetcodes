@@ -15,20 +15,17 @@ class Solution:
         :type divisor: int
         :rtype: int
         """
-        if dividend < -2**31 or dividend > 2**31 - 1 or divisor < -2**31 or divisor > 2**31 - 1:
-            return 2**31 - 1
-        cnt = -1
-        sum_ = 0
-        flag = 1
-        if (dividend < 0 and divisor > 0) or (dividend >0 and divisor <0):
-            flag = -1
-        abs_dividen = abs(dividend)
-        abs_divisor = abs(divisor)
-        while sum_ <= abs_dividen:
-            cnt += 1
-            sum_ += abs_divisor
-        
-        return cnt*flag
+        flag = -1 if (dividend < 0 and divisor >0) or (dividend > 0 and divisor < 0) else 1
+        dividend, divisor = abs(dividend), abs(divisor)
+        if dividend < divisor:
+            return 0
+        if dividend == divisor:
+            return flag * 1
+        if divisor == 1:
+            return flag * dividend if flag*dividend < 2**31 else 2**31 - 1
+        ans = len(range(divisor, dividend, divisor))
+        return flag*(ans + 1) if (ans+1) * divisor == dividend else flag*(ans)
+
 dividend = int(input())
 divisor = int(input())
 so = Solution()
