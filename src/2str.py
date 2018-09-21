@@ -6,6 +6,7 @@ def turn_str(str_):
     
 t = int(input())
 ans = []
+ans.add
 strs_input = []
 for i in range(t):
     n = int(input())
